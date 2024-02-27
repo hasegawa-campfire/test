@@ -1,0 +1,17 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  deploy_staging:
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://example.com
+    steps:
+      - name: Deploy
+        run: echo deploy staging
