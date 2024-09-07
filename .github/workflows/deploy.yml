@@ -34,7 +34,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":vue: Vueファイルに変更がありました\n**${{ env.PR_NUMBER }} ${{ env.PR_TITLE }}**"
+                    "text": ":vue: Vueファイルに変更がありました\n*<https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}|#${{ env.PR_NUMBER }} ${{ env.PR_TITLE }}>*"
                   }
                 }
               ]
