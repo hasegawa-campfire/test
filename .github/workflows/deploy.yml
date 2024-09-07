@@ -1,4 +1,4 @@
-name: Deploy Staging
+name: Vue Notifier
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - '**/*.vue'
 
 jobs:
-  test:
+  vue_notifier:
     runs-on: ubuntu-latest
     steps:
       - name: Get the PR Number
@@ -34,11 +34,11 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":vue: Vueファイルに変更がありました\n*<https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}|#${{ env.PR_NUMBER }} ${{ env.PR_TITLE }}>*"
+                    "text": "Vueファイルに変更がありました\n*<https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}|#${{ env.PR_NUMBER }} ${{ env.PR_TITLE }}>*"
                   }
                 }
               ]
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.VUE_NOTIFIER_SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
