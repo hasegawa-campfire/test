@@ -28,7 +28,8 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": ":vue: Vueファイルに変更がありました\n**<https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}|#${{ env.PR_NUMBER }} ${{ env.PR_TITLE }}>**"
+              "text": ":vue: Vueファイルに変更がありました\n**<https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}|#${{ env.PR_NUMBER }} ${{ env.PR_TITLE }}>**",
+              "mrkdwn": true
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
