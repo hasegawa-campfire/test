@@ -18,7 +18,7 @@ jobs:
 
       - name: Get the PR Title
         run: |
-          PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -oP '[^\n\r]*$')
+          PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | tail -n 1')
           echo "$PR_TITLE"
           echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
 
