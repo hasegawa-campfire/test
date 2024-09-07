@@ -13,5 +13,5 @@ jobs:
     steps:
       - name: Get the PR that triggered the push
         run: |
-          echo "GITHUB_EVENT_PATH content:"
-          cat $GITHUB_EVENT_PATH
+          PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+')
+          echo "$PR_NUMBER"
