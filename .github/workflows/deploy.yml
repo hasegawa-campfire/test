@@ -11,11 +11,14 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the PR that triggered the push
+      - name: Get the PR Number
         run: |
           PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+')
-          PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -o '[^\n\r]*$')
           echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+
+      - name: Get the PR Title
+        run: |
+          PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -o '[^\n\r]*$')
           echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
