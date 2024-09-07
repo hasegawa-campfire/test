@@ -14,17 +14,17 @@ jobs:
   vue_notifier:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the PR Link
+      - name: Get the Link Text
         run: |
           PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+' || true)
-          PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | tail -n 1)
+          LINK_TITLE=$(echo "${{ github.event.head_commit.message }}" | tail -n 1)
           SHORT_COMMIT_ID=$(echo "${{ github.event.head_commit.id }}" | cut -c 1-7)
           if [ -z "$PR_NUMBER" ]; then
-            PR_LINK="<https://github.com/${{ github.repository }}/commit/${{ github.event.head_commit.id }}|[$SHORT_COMMIT_ID] $PR_TITLE>"
+            LINK_MRKDWN="<https://github.com/${{ github.repository }}/commit/${{ github.event.head_commit.id }}|[$SHORT_COMMIT_ID] $LINK_TITLE>"
           else
-            PR_LINK="<https://github.com/${{ github.repository }}/pull/$PR_NUMBER|#$PR_NUMBER $PR_TITLE>"
+            LINK_MRKDWN="<https://github.com/${{ github.repository }}/pull/$PR_NUMBER|#$PR_NUMBER $LINK_TITLE>"
           fi
-          echo "PR_LINK=$PR_LINK" >> $GITHUB_ENV
+          echo "LINK_MRKDWN=$LINK_MRKDWN" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -38,7 +38,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Vueファイルに変更がありました\n*${{ env.PR_LINK }}*"
+                    "text": "Vueファイルに変更がありました\n*${{ env.LINK_MRKDWN }}*"
                   }
                 }
               ]
