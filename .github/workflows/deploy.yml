@@ -8,11 +8,8 @@ on:
       - '**/*.vue'
 
 jobs:
-  deploy_staging:
+  test:
     runs-on: ubuntu-latest
-    environment:
-      name: staging
-      url: https://example.com
     steps:
       - name: Get the PR that triggered the push
         run: echo "$GITHUB_EVENT_PATH"
