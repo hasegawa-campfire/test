@@ -25,7 +25,7 @@ jobs:
           payload: |
             {
               "text": "GitHub Action build result: https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}",
-              "unfurl_links": true
+              "unfurl_media": true
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
