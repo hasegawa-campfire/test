@@ -24,16 +24,8 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}"
-                  }
-                }
-              ]
+              "text": "GitHub Action build result: https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}",
+              "unfurl_links": true
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
