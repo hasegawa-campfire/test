@@ -3,8 +3,9 @@ name: Deploy Staging
 on:
   push:
     branches:
-      - staging
-  workflow_dispatch:
+      - main
+    paths:
+      - '**/*.vue'
 
 jobs:
   deploy_staging:
@@ -13,5 +14,5 @@ jobs:
       name: staging
       url: https://example.com
     steps:
-      - name: Deploy
-        run: echo deploy staging
+      - name: Get the PR that triggered the push
+        run: echo "$GITHUB_EVENT_PATH"
