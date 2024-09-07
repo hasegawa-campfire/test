@@ -14,4 +14,4 @@ jobs:
       - name: Get the PR that triggered the push
         run: |
           PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+')
-          echo "$PR_NUMBER"
+          echo "https://github.com/${{ github.repository }}/pull/$PR_NUMBER"
