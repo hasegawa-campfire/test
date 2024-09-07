@@ -19,6 +19,7 @@ jobs:
       - name: Get the PR Title
         run: |
           PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -o '[^\n\r]*$')
+          echo "$PR_TITLE"
           echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
