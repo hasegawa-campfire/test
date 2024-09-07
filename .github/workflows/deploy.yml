@@ -24,7 +24,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "GitHub Action build result: https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}",
+              "text": "GitHub Action build result: https://github.com/campfire-inc/campfire-2/pull/${{ env.PR_NUMBER}}",
               "unfurl_links": true
             }
         env:
