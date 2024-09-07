@@ -14,8 +14,9 @@ jobs:
       - name: Get the PR that triggered the push
         run: |
           PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+')
-          echo "https://github.com/${{ github.repository }}/pull/$PR_NUMBER"
+          PR_TITLE=$(echo "${{ github.event.head_commit.message }}" | grep -o '[^\n\r]*$')
           echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
+          echo "PR_TITLE=$PR_TITLE" >> $GITHUB_ENV
 
       - name: Send custom JSON data to Slack workflow
         id: slack
@@ -24,8 +25,7 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "GitHub Action build result: https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}",
-              "unfurl_links": true
+              "text": "GitHub Action build result: <https://github.com/${{ github.repository }}/pull/${{ env.PR_NUMBER}}|#${{ env.PR_NUMBER}} ${{ env.PR_TITLE }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
