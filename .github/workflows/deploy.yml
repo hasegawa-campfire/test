@@ -5,7 +5,11 @@ on:
     branches:
       - main
     paths:
-      - '**/*.vue'
+      - 'package.json'
+      - 'yarn.lock'
+      - 'config/webpack/**'
+      - 'frontend/**'
+      - 'frontend-community/**'
 
 jobs:
   vue_notifier:
@@ -22,13 +26,11 @@ jobs:
             PR_LINK="<https://github.com/${{ github.repository }}/pull/$PR_NUMBER|#$PR_NUMBER $PR_TITLE>"
           fi
           echo "PR_LINK=$PR_LINK" >> $GITHUB_ENV
-          echo "${{ github.event.head_commit }}"
 
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.27.0
         with:
-          # For posting a rich message using Block Kit
           payload: |
             {
               "text": "Vueファイルに変更がありました",
