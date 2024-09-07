@@ -14,7 +14,7 @@ jobs:
   vue_notifier:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the Link Text
+      - name: Get the Link Mrkdwn
         run: |
           PR_NUMBER=$(echo "${{ github.event.head_commit.message }}" | grep -oP '(?<=#)\d+' || true)
           LINK_TITLE=$(echo "${{ github.event.head_commit.message }}" | tail -n 1)
