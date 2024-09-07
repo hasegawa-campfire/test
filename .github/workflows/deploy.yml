@@ -12,4 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get the PR that triggered the push
-        run: echo "$GITHUB_EVENT_PATH"
+        run: |
+          echo "GITHUB_EVENT_PATH content:"
+          cat $GITHUB_EVENT_PATH
